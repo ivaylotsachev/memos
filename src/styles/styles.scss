@@ -1,0 +1,68 @@
+@import "./reset.scss";
+@import "./typo.scss";
+@import "./grid.scss";
+@import "./variables.scss";
+@import "./form.scss";
+
+// common styles
+html,
+body,
+main {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    scroll-behavior: smooth;
+    &.js-dark {
+        color: white;
+        background: black;
+    }
+    &.no-scroll {
+        overflow: hidden;
+    }
+    &::-webkit-scrollbar {
+        width: 2px;
+    }
+
+    &::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: darkgrey;
+        outline: 1px solid slategrey;
+    }
+}
+
+.page-container {
+    width: 100%;
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 50px 2rem 2rem;
+    min-height: 100%;
+    position: relative;
+}
+
+.divider {
+    width: 100%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.icon-danger {
+    color: var(--main-red);
+    &:hover {
+        color: var(--main-red-hover);
+    }
+}
+
+.icon-success {
+    color: var(--main-green);
+    &:hover {
+        color: var(--main-green-hover);
+    }
+}

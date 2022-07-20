@@ -1,0 +1,109 @@
+form {
+    border-radius: 10px;
+    width: 100%;
+    max-width: 600px;
+    color: black;
+    border: var(--main-border);
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2);
+    label {
+        display: inline-block;
+    }
+
+    input,
+    button,
+    textarea {
+        border-radius: 10px;
+        background: transparent;
+        outline: none;
+        border-width: 1px;
+    }
+
+    input,
+    textarea {
+        padding: 1rem;
+        color: black;
+        border-color: rgba(0, 0, 0, 0.2);
+    }
+
+    .form-title {
+        font-size: 34px;
+        font-weight: 300;
+        text-transform: uppercase;
+        color: var(--main-blue);
+        font-weight: 600;
+    }
+
+    button {
+        padding: 20px;
+        background: rgb(81, 98, 180);
+        transition: background 0.3s ease-in-out;
+        color: white;
+        &:hover {
+            background: rgb(42, 45, 134);
+        }
+    }
+}
+
+.button {
+    cursor: pointer;
+    border-radius: 30px;
+    border: 2px solid;
+    transition: background 0.3s ease-in-out;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    &:disabled {
+        background-color: #ccc !important;
+    }
+    &.button-primary {
+        background: rgb(81, 98, 180);
+        &:hover {
+            background: rgb(42, 45, 134);
+        }
+    }
+    &.button-default {
+        border-color: black;
+        color: black;
+        &:hover {
+            background: black;
+            color: white;
+        }
+    }
+    &.button-blue {
+        background-color: var(--main-blue);
+        border-color: var(--main-blue);
+        color: white;
+        &:hover {
+            background-color: var(--main-blue-hover);
+            border-color: var(--main-blue-hover);
+        }
+    }
+    &.button-danger {
+        background-color: var(--main-red);
+        border-color: var(--main-red);
+        color: white;
+        &:hover {
+            background-color: var(--main-red-hover);
+            border-color: var(--main-red-hover);
+        }
+    }
+    &.button-success {
+        background-color: green;
+        border-color: green;
+        color: white;
+        &:hover {
+            background-color: darkgreen;
+            border-color: darkgreen;
+        }
+    }
+}
+
+.register-link {
+    transition: color 0.3s ease-in-out;
+    &:hover {
+        color: var(--main-blue-hover);
+    }
+}
+
+.error-text {
+    height: 20px;
+}

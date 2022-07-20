@@ -1,0 +1,41 @@
+@import url(https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic);
+@import url(https://fonts.googleapis.com/css?family=Righteous:regular);
+
+body {
+    font-family: "Poppins", sans-serif;
+}
+
+.page-title {
+    font-family: "Righteous", cursive;
+    font-size: clamp(40px, 5vw, 5vw);
+}
+.page-subtitle {
+    font-size: clamp(16px, 1.5vw, 1.4vw);
+    text-transform: uppercase;
+}
+
+.post-title {
+    font-size: 24px;
+    text-transform: capitalize;
+}
+
+.title-normal {
+    font-size: 20px;
+    text-transform: uppercase;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.underlined {
+    text-decoration: underline;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+.text-danger {
+    color: var(--main-red);
+}
