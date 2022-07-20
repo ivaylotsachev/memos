@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export const useValidate = () => {
-    const [values, setValues] = useState({ email: "", password: "" });
+    const [values, setValues] = useState({ email: "", password: "", name: "" });
     const [errors, setErrors] = useState({});
 
     const validator = (e) => {
@@ -12,21 +12,24 @@ export const useValidate = () => {
                     : setErrors((errors) => ({ ...errors, email: true }));
                 break;
             case 'password':
-                validatePassword(values.password)
+                validateLength(values.password, 6)
                     ? setErrors((errors) => ({ ...errors, password: false }))
                     : setErrors((errors) => ({ ...errors, password: true }));
+                break;
+            case 'name':
+                validateLength(values.name, 3)
+                    ? setErrors((errors) => ({ ...errors, name: false }))
+                    : setErrors((errors) => ({ ...errors, name: true }));
                 break;
             default:
                 setErrors({})
         }
     };
 
-    const changeHandler = (e) => {
-        setValues((oldValues) => ({
-            ...oldValues,
-            [e.target.name]: e.target.value,
-        }));
-    };
+    const changeHandler = (e) => setValues((oldValues) => (
+        { ...oldValues, [e.target.name]: e.target.value }
+    ));
+
 
     return [values, errors, changeHandler, validator];
 };
@@ -39,4 +42,4 @@ const validateEmail = (value) => {
     }
 };
 
-const validatePassword = (value) => value.length >= 6;
+const validateLength = (value, len) => value.length >= len;
