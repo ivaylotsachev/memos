@@ -1,13 +1,16 @@
 @import url(https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic);
 @import url(https://fonts.googleapis.com/css?family=Righteous:regular);
 
+@import url(https://fonts.googleapis.com/css?family=Expletus+Sans:regular,500,600,700,italic,500italic,600italic,700italic);
+
 body {
     font-family: "Poppins", sans-serif;
 }
 
 .page-title {
-    font-family: "Righteous", cursive;
-    font-size: clamp(40px, 5vw, 5vw);
+    font-family: "Expletus Sans", cursive;
+    font-size: clamp(40px, 6vw, 6vw);
+    text-transform: uppercase;
 }
 .page-subtitle {
     font-size: clamp(16px, 1.5vw, 1.4vw);

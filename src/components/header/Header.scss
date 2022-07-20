@@ -1,0 +1,10 @@
+.app-header {
+    position: absolute;
+    border-bottom: var(--main-border);
+    z-index: 50;
+}
+
+.app-nav-list-item {
+    font-weight: bold;
+    text-transform: uppercase;
+}

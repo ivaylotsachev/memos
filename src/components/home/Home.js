@@ -1,8 +1,18 @@
+import { motion } from 'framer-motion';
+
 const Home = () => {
     return (
-        <div className="page-container">
-            home
-        </div>
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="page-container"
+        >
+            <div className="home-head-section jcfs">
+                <h1 className="page-title">Memos</h1>
+                <h4 className="page-subtitle">Best place to share memories!</h4>
+            </div>
+        </motion.div>
     )
 }
 
