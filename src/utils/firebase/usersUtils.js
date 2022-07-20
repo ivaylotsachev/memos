@@ -1,10 +1,11 @@
+import toonavatar from 'cartoon-avatar';
 import { auth, database } from '../../firebase';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { addDoc, collection, doc, getDocs, setDoc } from 'firebase/firestore';
 
 export const registerUser = (user, setDbError, navigate) => {
     const { email, password, name } = user;
-
+    console.log(auth.currentUser)
     createUserWithEmailAndPassword(auth, email, password)
         .then( () => {
             updateUserProfile(name);
@@ -30,19 +31,20 @@ export const checkForExistingUsername = async (username) => {
 export const updateUserProfile = (name ) => {
     updateProfile(auth.currentUser, {
         displayName: name,
+        photoURL: toonavatar.generate_avatar()
     })
         .then(async () => {
             const currentUser = auth.currentUser;
 
             // store username in database
             await addDoc(collection(database, 'usernames'), { name });
-
             await setDoc(doc(database, 'users', `${currentUser.uid}`), {
                 databaseId: currentUser.uid,
                 email: currentUser.email,
                 displayName: currentUser.displayName,
                 posts: [],
-                comments: []
+                comments: [],
+                photoURL: currentUser.photoURL
             })
         })
 }

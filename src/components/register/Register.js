@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useValidate } from "../../hooks/useValidate";
+import { motion } from "framer-motion";
 import { checkForExistingUsername, registerUser } from "../../utils/firebase/usersUtils";
 
 // styles
@@ -25,7 +26,11 @@ const Register = () => {
     };
 
     return (
-        <div className='page-container register-page flex flex-column flex-center'>
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className='page-container register-page flex flex-column flex-center'>
             <form className="register-container" onSubmit={handleSubmit}>
                 <h1 className="form-title">register</h1>
                 <div className="divider mt-3 mb-4"></div>
@@ -76,7 +81,7 @@ const Register = () => {
                     Register
                 </button>
             </form>
-        </div>
+        </motion.div>
     );
 };
 
