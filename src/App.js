@@ -1,11 +1,23 @@
+import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import { useDispatch } from 'react-redux/es/exports';
 import { useLocation } from 'react-router-dom';
 import { AnimatePresence } from "framer-motion";
+import { onAuthStateChanged } from 'firebase/auth';
+import { setUser } from  "./redux/actions/usersAction";
 // components
 import { Header, Home, Login, Register } from './components';
+import { auth } from './firebase';
 
 function App() {
     const location = useLocation();
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+            user && dispatch(setUser({...user}))
+        })
+    }, [])
 
     return (
         <>
