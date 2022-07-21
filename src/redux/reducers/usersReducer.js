@@ -2,7 +2,7 @@ import * as types from '../types';
 
 const initialState = {
     users: [],
-    user: {},
+    user: null
 }
 
 const usersReducer = (state = initialState, action) => {

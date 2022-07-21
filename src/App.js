@@ -15,7 +15,13 @@ function App() {
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
-            user && dispatch(setUser({...user}))
+
+            if (!user) {
+                console.log("no user", user);
+            } else {
+                console.log("app user", user);
+                user && dispatch(setUser({...user}))
+            }
         })
     }, [])
 
