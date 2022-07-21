@@ -41,14 +41,16 @@ const Header = () => {
                     <li className="app-nav-list-item aic">
                         <NavLink to={"/"} className="flex aic">
                             <FiHome className='mr-2'/>
-                            <span>Home</span>
+                            <span>Memos</span>
                         </NavLink>
                     </li>
                     {!user && <div className="app-nav-user-actions flex aic">
-                        <NavLink to={"/login"} className='flex aic app-nav-list-item'>
-                            <FiLogIn className='mr-2'/>
-                            <span>Login</span>
-                        </NavLink>
+                        <li className="app-nav-list-item aic">
+                            <NavLink to={"/login"} className='flex aic app-nav-list-item'>
+                                <FiLogIn className='mr-2'/>
+                                <span>Login</span>
+                            </NavLink>
+                        </li>
                     </div>}
                     {user && <div className="app-nav-user-actions flex aic">
                         <motion.li initial={{opacity: 0}} animate={{ opacity: 1}} exit={{opacity: 0}} className="app-nav-list-item aic">

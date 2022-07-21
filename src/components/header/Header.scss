@@ -10,6 +10,13 @@
     .app-nav-list-item {
         font-weight: bold;
         text-transform: uppercase;
+        a    {
+            transition: color 0.3s ease-in-out;
+        }
+
+        .active {
+            color: orange;
+        }
     }
 
     .user-avatar {
