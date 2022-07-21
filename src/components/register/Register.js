@@ -1,17 +1,20 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { useValidate } from "../../hooks/useValidate";
 import { motion } from "framer-motion";
 import { checkForExistingUsername, registerUser } from "../../utils/firebase/usersUtils";
 
 // styles
 import "./Register.scss";
+import { setUser } from "../../redux/actions/usersAction";
 
 const Register = () => {
     const [nameError, setNameError] = useState(false);
     const [dbError, setDbError] = useState(false);
     const [values, errors, changeHandler, validator] = useValidate();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -19,10 +22,10 @@ const Register = () => {
         if (Object.values(errors).some(i => i)) return;
 
         await checkForExistingUsername(values.name)
-            .then(data => setNameError(true))
-
-        registerUser(values, setDbError, navigate)
-
+            .then(data =>  data ?
+                setNameError(true)
+                :
+                registerUser(values, setDbError, navigate, dispatch, setUser))
     };
 
     return (

@@ -10,7 +10,7 @@ const usersReducer = (state = initialState, action) => {
 
     switch(action.type) {
         case types.SET_USER:
-            return { ...state, user: payload }
+            return { ...state, user: payload === null ? null : {...state.user, ...payload}}
         default:
             return state;
     }

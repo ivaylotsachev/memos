@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
@@ -13,7 +12,6 @@ import { setUser } from '../../redux/actions/usersAction';
 
 const Header = () => {
     // constants
-    const [imageURL, setImageURL] = useState(null);
     const user = useSelector(state => state.users.user);
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -26,13 +24,6 @@ const Header = () => {
             console.log("logout error: ", error.message);
         });
     }
-
-    // hooks
-    useEffect(() => {
-        user && setImageURL(user.photoURL)
-
-        console.log("headeer", user);
-    }, [user])
 
     return (
         <header className="app-header p-3 w-100">
@@ -71,7 +62,7 @@ const Header = () => {
                                 <span>Logout</span>
                             </NavLink>
                         </motion.li>
-                        <motion.img  initial={{opacity: 0}} animate={{ opacity: 1}} className='user-avatar' src={imageURL} alt="user avatar" />
+                        <motion.img  initial={{opacity: 0}} animate={{ opacity: 1}} className='user-avatar' src={user && user.photoURL} alt="user avatar" />
                     </div>}
                 </ul>
             </nav>

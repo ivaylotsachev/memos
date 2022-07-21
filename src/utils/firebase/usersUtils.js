@@ -3,12 +3,12 @@ import { auth, database } from '../../firebase';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { addDoc, collection, doc, getDocs, setDoc } from 'firebase/firestore';
 
-export const registerUser = (user, setDbError, navigate) => {
+export const registerUser = (user, setDbError, navigate, dispatch, setUser) => {
     const { email, password, name } = user;
-    console.log(auth.currentUser)
+
     createUserWithEmailAndPassword(auth, email, password)
         .then( () => {
-            updateUserProfile(name);
+            updateUserProfile(name, dispatch, setUser);
             navigate && navigate("/")
         })
         .catch(error => {
@@ -28,13 +28,15 @@ export const checkForExistingUsername = async (username) => {
     return exist;
 }
 
-export const updateUserProfile = (name ) => {
+export const updateUserProfile = (name, dispatch, setUser ) => {
     updateProfile(auth.currentUser, {
         displayName: name,
         photoURL: toonavatar.generate_avatar()
     })
         .then(async () => {
             const currentUser = auth.currentUser;
+
+            dispatch(setUser(currentUser));
 
             // store username in database
             await addDoc(collection(database, 'usernames'), { name });
