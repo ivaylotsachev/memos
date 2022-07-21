@@ -31,7 +31,7 @@ const Header = () => {
     useEffect(() => {
         user && setImageURL(user.photoURL)
 
-        console.log("headeer", user);
+        console.log("headeer user changed", user);
     }, [user])
 
     return (
@@ -41,7 +41,7 @@ const Header = () => {
                     <li className="app-nav-list-item aic">
                         <NavLink to={"/"} className="flex aic">
                             <FiHome className='mr-2'/>
-                            <span>Memos</span>
+                            <span>Memos, {auth.currentUser && auth.currentUser.displayName}</span>
                         </NavLink>
                     </li>
                     {!user && <div className="app-nav-user-actions flex aic">

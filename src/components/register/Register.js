@@ -19,9 +19,10 @@ const Register = () => {
         if (Object.values(errors).some(i => i)) return;
 
         await checkForExistingUsername(values.name)
-            .then(data => setNameError(true))
-
-        registerUser(values, setDbError, navigate)
+            .then(data => {
+                console.log('data', data)
+                data ? setNameError(true) : registerUser(values, setDbError, navigate)
+            })
 
     };
 

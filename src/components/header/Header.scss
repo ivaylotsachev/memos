@@ -10,13 +10,29 @@
     .app-nav-list-item {
         font-weight: bold;
         text-transform: uppercase;
-        a    {
+        a {
+            position: relative;
+            display: flex;
+            justify-content: center;
             transition: color 0.3s ease-in-out;
+            &:hover {
+                color: var(--main-blue-hover);
+            }
         }
 
-        .active {
-            color: orange;
+        a:after {
+            content: "";
+            width: 0;
+            height: 1px;
+            background: black;
+            position: absolute;
+            bottom: -5px;
+            transition: width 0.3s ease-in-out;
         }
+        .active:after {
+            width: 100%;
+        }
+
     }
 
     .user-avatar {
