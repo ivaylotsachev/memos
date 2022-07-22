@@ -37,8 +37,7 @@ const Login = () => {
             exit={{ opacity: 0 }}
             className='page-container register-page flex flex-column flex-center'>
             <form className="register-container" onSubmit={handleSubmit}>
-                <h1 className="form-title">Login</h1>
-                <div className="divider mt-3 mb-4"></div>
+                <h1 className="form-title mb-5">Login</h1>
                 <div className='input-container flex flex-column'>
                     <label htmlFor='email' className="mb-2">Email</label>
                     <input
@@ -71,9 +70,11 @@ const Login = () => {
                     Login
                 </button>
 
-                <div className="login-footer flex aic jcsb mt-5">
+                <div className="login-footer flex aic jcfe mt-3">
                     <p>Don`t have an account?</p>
-                    <NavLink to="/register"><strong className="underlined">Register</strong></NavLink>
+                    <NavLink to="/register">
+                        <h3 className="underlined ml-3 register-button">Register</h3>
+                    </NavLink>
                 </div>
             </form>
         </motion.div>

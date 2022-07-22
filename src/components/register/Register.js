@@ -1,31 +1,35 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { useValidate } from "../../hooks/useValidate";
 import { motion } from "framer-motion";
-import { checkForExistingUsername, registerUser } from "../../utils/firebase/usersUtils";
+import { checkForExistingUsername } from "../../utils/firebase/users";
+import { registerUser, setRegisterError } from "../../redux/actions/usersAction";
 
 // styles
 import "./Register.scss";
-import { setUser } from "../../redux/actions/usersAction";
 
 const Register = () => {
-    const [nameError, setNameError] = useState(false);
-    const [dbError, setDbError] = useState(false);
-    const [values, errors, changeHandler, validator] = useValidate();
-    const navigate = useNavigate();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const registerError = useSelector(state => state.users.registerError);
+
+    const [dbError, setDbError] = useState("");
+    const [nameError, setNameError] = useState(false);
+    const [values, errors, changeHandler, validator] = useValidate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (Object.values(errors).some(i => i)) return;
-
         await checkForExistingUsername(values.name)
-            .then(data =>  data ?
-                setNameError(true)
-                :
-                registerUser(values, setDbError, navigate, dispatch, setUser))
+            .then(exist => {
+                if (exist) {
+                    setNameError(true)
+                } else {
+                    setNameError(false);
+                    dispatch(registerUser(values, navigate));
+                }
+            })
     };
 
     return (
@@ -35,8 +39,7 @@ const Register = () => {
             exit={{ opacity: 0 }}
             className='page-container register-page flex flex-column flex-center'>
             <form className="register-container" onSubmit={handleSubmit}>
-                <h1 className="form-title">register</h1>
-                <div className="divider mt-3 mb-4"></div>
+                <h1 className="form-title mb-5">register</h1>
                 <div className='input-container flex flex-column'>
                     <label htmlFor='email' className="mb-2">Email</label>
                     <input
@@ -49,7 +52,7 @@ const Register = () => {
                         onBlur={validator}
                     />
                     {errors.email && !dbError && <p className="error-message mt-2 ml-3">Email is invalid!</p>}
-                    {dbError && <p className="error-message ml-3">{dbError}</p>}
+                    {dbError && <p className="error-message mt-2 ml-3">{dbError}</p>}
                 </div>
                 <div className='input-container flex flex-column my-2'>
                     <label htmlFor='password' className="mb-2">Password</label>

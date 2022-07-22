@@ -4,6 +4,7 @@ textarea {
     background: transparent;
     outline: none;
     border: none;
+    background-image: none !important;
 }
 
 input,
@@ -12,6 +13,20 @@ textarea {
     color: black;
     border: var(--main-border);
     border-radius: 20px;
+    background-color: white;
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus,
+    &:-webkit-autofill:active{
+        -webkit-box-shadow: 0 0 0 30px white inset !important;
+    }
+}
+
+.js-dark {
+    input, textarea {
+        border-color: transparent;
+        color: black;
+    }
 }
 
 input {
