@@ -10,12 +10,33 @@
     .app-nav-list-item {
         font-weight: bold;
         text-transform: uppercase;
-        a    {
-            transition: color 0.3s ease-in-out;
+        p {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-
+        p:after {
+            content: "";
+            width: 0;
+            height: 100%;
+            background-color: black;
+            position: absolute;
+            mix-blend-mode:difference;
+            z-index: 1;
+            transition: width 0.3s ease-in-out;
+        }
         .active {
-            color: orange;
+            p {
+                color: white;
+                mix-blend-mode: difference;
+                &:after {
+                    width: 110%;
+                }
+            }
         }
     }
 

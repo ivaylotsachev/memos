@@ -32,14 +32,14 @@ const Header = () => {
                     <li className="app-nav-list-item aic">
                         <NavLink to={"/"} className="flex aic">
                             <FiHome className='mr-2'/>
-                            <span>Memos</span>
+                            <p>Memos</p>
                         </NavLink>
                     </li>
                     {!user && <div className="app-nav-user-actions flex aic">
                         <li className="app-nav-list-item aic">
                             <NavLink to={"/login"} className='flex aic app-nav-list-item'>
                                 <FiLogIn className='mr-2'/>
-                                <span>Login</span>
+                                <p>Login</p>
                             </NavLink>
                         </li>
                     </div>}
@@ -47,19 +47,19 @@ const Header = () => {
                         <motion.li initial={{opacity: 0}} animate={{ opacity: 1}} exit={{opacity: 0}} className="app-nav-list-item aic">
                             <NavLink to={"/create-post"} className='flex aic app-nav-list-item mr-3'>
                                 <FiFilePlus className='mr-2'/>
-                                <span>Create Post</span>
+                                <p>Create Post</p>
                             </NavLink>
                         </motion.li>
                         <motion.li initial={{opacity: 0}} animate={{ opacity: 1}} className="app-nav-list-item aic">
                             <NavLink to={"/user-posts"} className='flex aic app-nav-list-item mr-3'>
                                 <FiClipboard className='mr-2'/>
-                                <span>My posts</span>
+                                <p>My posts</p>
                             </NavLink>
                         </motion.li>
                         <motion.li initial={{opacity: 0}} animate={{ opacity: 1}} className="app-nav-list-item aic" onClick={handleLogout}>
                             <NavLink to={"/login"} className='flex aic app-nav-list-item mr-3'>
                                 <FiLogOut className='mr-2'/>
-                                <span>Logout</span>
+                                <p>Logout</p>
                             </NavLink>
                         </motion.li>
                         <motion.img  initial={{opacity: 0}} animate={{ opacity: 1}} className='user-avatar' src={user && user.photoURL} alt="user avatar" />
