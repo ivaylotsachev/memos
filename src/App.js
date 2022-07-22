@@ -6,7 +6,7 @@ import { AnimatePresence } from "framer-motion";
 import { onAuthStateChanged } from 'firebase/auth';
 import { setUser } from  "./redux/actions/usersAction";
 // components
-import { Header, Home, Login, Register } from './components';
+import { CreatePost, Header, Home, Login, Register } from './components';
 import { auth } from './firebase';
 
 function App() {
@@ -28,6 +28,7 @@ function App() {
                     <Route path='/' element={<Home/>}/>
                     <Route path='/register' element={<Register/>}/>
                     <Route path='/login' element={<Login/>}/>
+                    <Route path='/create-post' element={<CreatePost/>}/>
                 </Routes>
             </AnimatePresence>
         </>
