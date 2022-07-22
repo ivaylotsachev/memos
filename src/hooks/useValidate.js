@@ -1,10 +1,17 @@
 import { useState } from "react";
 
 export const useValidate = () => {
-    const [values, setValues] = useState({ email: "", password: "", name: "" });
+    const [values, setValues] = useState({
+        email: "",
+        password: "",
+        name: ""
+    });
+
     const [errors, setErrors] = useState({});
 
     const validator = (e) => {
+        console.log('validator', e.target.name);
+
         switch(e.target.name) {
             case 'email':
                 validateEmail(values.email)

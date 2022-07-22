@@ -1,33 +1,30 @@
-import { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
-import { useValidate } from "../../hooks/useValidate";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { motion } from "framer-motion";
 import { auth } from "../../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { setUser } from "../../redux/actions/usersAction";
+import Form from "../form/Form";
 
 const Login = () => {
-    const [dbError, setDbError] = useState(false);
-    const [values, errors, changeHandler, validator] = useValidate();
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const handleSubmit = async (data) => {
+        console.log("login component", data);
 
-        signInWithEmailAndPassword(auth, values.email, values.password)
-            .then((userCredential) => {
-                const user = userCredential.user;
-                dispatch(setUser(user));
-                navigate("/")
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
+        // signInWithEmailAndPassword(auth, values.email, values.password)
+        //     .then((userCredential) => {
+        //         const user = userCredential.user;
+        //         dispatch(setUser(user));
+        //         navigate("/")
+        //     })
+        //     .catch((error) => {
+        //         const errorCode = error.code;
+        //         const errorMessage = error.message;
 
-                console.log("logni error", errorMessage)
-            });
+        //         console.log("logni error", errorMessage)
+        //     });
     };
 
     return (
@@ -35,48 +32,13 @@ const Login = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className='page-container register-page flex flex-column flex-center'>
-            <form className="register-container" onSubmit={handleSubmit}>
-                <h1 className="form-title mb-5">Login</h1>
-                <div className='input-container flex flex-column'>
-                    <label htmlFor='email' className="mb-2">Email</label>
-                    <input
-                        type='email'
-                        name='email'
-                        id='email'
-                        required
-                        value={values.email}
-                        onChange={changeHandler}
-                        onBlur={validator}
-                    />
-                    {errors.email && !dbError && <p className="error-message mt-2 ml-3">Email is invalid!</p>}
-                    {dbError && <p className="error-message ml-3">{dbError}</p>}
-                </div>
-                <div className='input-container flex flex-column my-2'>
-                    <label htmlFor='password' className="mb-2">Password</label>
-                    <input
-                        type='password'
-                        name='password'
-                        id='password'
-                        required
-                        value={values.password}
-                        onChange={changeHandler}
-                        onBlur={validator}
-                    />
-                    {errors.password && <p className="error-message mt-2 ml-3">Password must be at least 6 characters!</p>}
-                </div>
-
-                <button className='button button-success mt-3'>
-                    Login
-                </button>
-
-                <div className="login-footer flex aic jcfe mt-3">
-                    <p>Don`t have an account?</p>
-                    <NavLink to="/register">
-                        <h3 className="underlined ml-3 register-button">Register</h3>
-                    </NavLink>
-                </div>
-            </form>
+            className='page-container register-page flex flex-column flex-center'
+        >
+            <Form
+                title="Login"
+                type="login"
+                handleSubmit={handleSubmit}
+            />
         </motion.div>
     );
 };

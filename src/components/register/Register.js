@@ -1,33 +1,27 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from 'react-redux';
+import { useState } from "react";
+import { useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
-import { useValidate } from "../../hooks/useValidate";
 import { motion } from "framer-motion";
 import { checkForExistingUsername } from "../../utils/firebase/users";
-import { registerUser, setRegisterError } from "../../redux/actions/usersAction";
-
-// styles
-import "./Register.scss";
+import { registerUser } from "../../redux/actions/usersAction";
+import Form from "../form/Form";
 
 const Register = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const registerError = useSelector(state => state.users.registerError);
-
-    const [dbError, setDbError] = useState("");
     const [nameError, setNameError] = useState(false);
-    const [values, errors, changeHandler, validator] = useValidate();
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const handleSubmit = async (user) => {
 
-        await checkForExistingUsername(values.name)
+        console.log("register component", user);
+
+        await checkForExistingUsername(user.name)
             .then(exist => {
                 if (exist) {
                     setNameError(true)
                 } else {
                     setNameError(false);
-                    dispatch(registerUser(values, navigate));
+                    dispatch(registerUser(user, navigate));
                 }
             })
     };
@@ -37,56 +31,14 @@ const Register = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className='page-container register-page flex flex-column flex-center'>
-            <form className="register-container" onSubmit={handleSubmit}>
-                <h1 className="form-title mb-5">register</h1>
-                <div className='input-container flex flex-column'>
-                    <label htmlFor='email' className="mb-2">Email</label>
-                    <input
-                        type='email'
-                        name='email'
-                        id='email'
-                        required
-                        value={values.email}
-                        onChange={changeHandler}
-                        onBlur={validator}
-                    />
-                    {errors.email && !dbError && <p className="error-message mt-2 ml-3">Email is invalid!</p>}
-                    {dbError && <p className="error-message mt-2 ml-3">{dbError}</p>}
-                </div>
-                <div className='input-container flex flex-column my-2'>
-                    <label htmlFor='password' className="mb-2">Password</label>
-                    <input
-                        type='password'
-                        name='password'
-                        id='password'
-                        required
-                        value={values.password}
-                        onChange={changeHandler}
-                        onBlur={validator}
-                    />
-                    {errors.password && <p className="error-message mt-2 ml-3">Password must be at least 6 characters!</p>}
-                </div>
-
-                <div className='input-container flex flex-column'>
-                    <label htmlFor='name' className="mb-2">Account name</label>
-                    <input
-                        type='text'
-                        name='name'
-                        id='name'
-                        required
-                        value={values.name}
-                        onChange={changeHandler}
-                        onBlur={validator}
-                    />
-                    {errors.name && !nameError && <p className="error-message mt-2 ml-3">Account name must be at least 3 characters!</p>}
-                    {nameError && <p className="error-message mt-2 ml-3">Account name is already taken!</p>}
-                </div>
-
-                <button className='button button-success mt-3'>
-                    Register
-                </button>
-            </form>
+            className='page-container register-page flex flex-column flex-center'
+        >
+            <Form
+                title="Register"
+                type="register"
+                handleSubmit={handleSubmit}
+                nameError={nameError}
+            />
         </motion.div>
     );
 };
