@@ -50,4 +50,13 @@
             line-height: 1.625;
         }
     }
+
+    &.latest {
+        max-width: 32%;
+        flex-direction: column;
+
+        .post-image-container {
+            max-width: unset;
+        }
+    }
 }

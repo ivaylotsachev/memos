@@ -14,8 +14,6 @@ import {
 import moment from "moment";
 
 export const fbCreatePost = (post) => {
-    console.log("firebase post: createPost", post);
-
     return new Promise(async (resolve, reject) => {
         const user = auth.currentUser;
         const postsRef = collection(database, "posts");
@@ -61,14 +59,13 @@ export const fbGetLatestPosts = () => {
         const latestPosts = [];
 
         await querySnapshot.forEach((doc) => {
-            console.log("-------", doc.id, " => ", doc.data().title);
             latestPosts.push({
                 ...doc.data(),
                 databaseId: doc.id,
             });
         });
 
-        console.log("latest", latestPosts);
+        resolve(latestPosts);
     });
 };
 

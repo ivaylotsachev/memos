@@ -1,17 +1,20 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
-import { fetchPosts } from "../../redux/actions/postsAction";
+import { fetchLatestPosts, fetchPosts } from "../../redux/actions/postsAction";
 // components
 import PostsList from "../posts-list/PostList";
 
 const Home = () => {
     // constants
     const dispatch = useDispatch();
+    const posts = useSelector((state) => state.posts.posts);
+    const latestPosts = useSelector((state) => state.posts.latestPosts);
 
     // hooks
     useEffect(() => {
         dispatch(fetchPosts());
+        dispatch(fetchLatestPosts());
     }, []);
 
     return (
@@ -26,7 +29,11 @@ const Home = () => {
                 <h4 className='page-subtitle'>Best place to share memories!</h4>
             </div>
 
-            <PostsList />
+            <h2 className='my-4'>Latest</h2>
+            <PostsList posts={latestPosts} type='latest' />
+
+            <h2 className='mt-5 mb-3'>All posts</h2>
+            <PostsList posts={posts} />
         </motion.div>
     );
 };

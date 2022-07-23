@@ -1,4 +1,4 @@
-import { fbGetAllPosts } from "../../utils/firebase/posts";
+import { fbGetAllPosts, fbGetLatestPosts } from "../../utils/firebase/posts";
 import * as types from "../types";
 
 export const setPosts = (payload) => ({
@@ -12,11 +12,21 @@ export const setLatestPosts = (payload) => ({
 });
 
 // async actions
-export const fetchPosts = (post) => {
+export const fetchPosts = () => {
     return async (dispatch) => {
         await fbGetAllPosts().then((posts) => {
-            console.log("postsAction fetchPosts: posts fetched", posts);
+            console.log("postsAction fetchPosts:", posts);
             posts.length && dispatch(setPosts(posts));
+        });
+    };
+};
+
+// async actions
+export const fetchLatestPosts = () => {
+    return async (dispatch) => {
+        await fbGetLatestPosts().then((posts) => {
+            console.log("postsAction fetchLatest:", posts);
+            posts.length && dispatch(setLatestPosts(posts));
         });
     };
 };
