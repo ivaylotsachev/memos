@@ -1,9 +1,16 @@
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { fbCreatePost } from '../../utils/firebase/posts';
 import CreatePostForm from '../form/CreatePostForm';
 
 const CreatePost = () => {
+    const navigate = useNavigate();
     const handleSubmit = (post) => {
-        console.log("Createpost handleSubmit", post);
+        fbCreatePost(post)
+            .then(data => {
+                console.log("create post", data);
+                navigate("/");
+            });
     }
 
     return (

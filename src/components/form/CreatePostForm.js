@@ -9,7 +9,7 @@ const CreatePostForm = ({type, title, handleSubmit}) => {
         e.preventDefault();
 
         if (Object.values(errors).some(e => e)) return;
-        handleSubmit(values);
+        handleSubmit(values)
     }
 
     return (

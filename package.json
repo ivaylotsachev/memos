@@ -9,6 +9,7 @@
     "cartoon-avatar": "^1.0.2",
     "firebase": "^9.9.0",
     "framer-motion": "^6.5.1",
+    "moment": "^2.29.4",
     "node-sass": "^7.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -20,6 +21,7 @@
     "redux": "^4.2.0",
     "redux-thunk": "^2.4.1",
     "sass": "^1.53.0",
+    "uuid": "^8.3.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
