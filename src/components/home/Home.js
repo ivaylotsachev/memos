@@ -13,7 +13,6 @@ const Home = () => {
 
     // hooks
     useEffect(() => {
-        dispatch(fetchPosts());
         dispatch(fetchLatestPosts());
     }, []);
 

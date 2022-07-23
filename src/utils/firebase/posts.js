@@ -33,21 +33,21 @@ export const fbCreatePost = (post) => {
     });
 };
 
-export const subscribeToPostsCollection = async (dispatch, action) => {
-    return new Promise((resolve, reject) => {
-        const unsubscribe = onSnapshot(
-            collection(database, "posts"),
-            (snapshot) => {
-                const dbPosts = snapshot.docs.map((doc) => {
-                    return {
-                        ...doc.data(),
-                        databaseId: doc.id,
-                    };
-                });
-                resolve(dbPosts);
-            }
-        );
-    });
+export const fbsubscribeToPostsCollection = async (dispatch, action) => {
+    const unsubscribe = onSnapshot(
+        collection(database, "posts"),
+        (snapshot) => {
+            const dbPosts = snapshot.docs.map((doc) => {
+                return {
+                    ...doc.data(),
+                    databaseId: doc.id,
+                };
+            });
+
+            console.log("posts changed", dbPosts);
+            dispatch && action && dispatch(action(dbPosts));
+        }
+    );
 };
 
 export const fbGetLatestPosts = () => {

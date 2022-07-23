@@ -11,8 +11,6 @@ const PostItem = ({ post, type, emphasis }) => {
         photoUrl,
     } = post;
 
-    console.log(post);
-
     return (
         <div
             className={`post-item flex mb-3 ${
