@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { motion } from "framer-motion";
 import { fetchPosts } from "../../redux/actions/postsAction";
+// components
+import PostsList from "../posts-list/PostList";
 
 const Home = () => {
     // constants
@@ -23,6 +25,8 @@ const Home = () => {
                 <h1 className='page-title'>Memos</h1>
                 <h4 className='page-subtitle'>Best place to share memories!</h4>
             </div>
+
+            <PostsList />
         </motion.div>
     );
 };

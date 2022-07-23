@@ -4,8 +4,12 @@ import {
     collection,
     doc,
     getDocs,
+    limit,
     onSnapshot,
+    orderBy,
+    query,
     setDoc,
+    Timestamp,
 } from "firebase/firestore";
 import moment from "moment";
 
@@ -23,8 +27,10 @@ export const fbCreatePost = (post) => {
             comments: [],
             displayName: user.displayName,
             userId: user.uid,
-            photoUrl: user.photoURL,
+            avatar: user.photoURL,
             createdAt,
+            timestamp: Timestamp.fromDate(new Date(Date.now())),
+            databaseId: postsRef.id,
         }).then(() => resolve("success"));
     });
 };
@@ -43,5 +49,41 @@ export const subscribeToPostsCollection = async (dispatch, action) => {
                 resolve(dbPosts);
             }
         );
+    });
+};
+
+export const fbGetLatestPosts = () => {
+    const postsRef = collection(database, "posts");
+    const q = query(postsRef, orderBy("timestamp", "desc"), limit(3));
+
+    return new Promise(async (resolve, reject) => {
+        const querySnapshot = await getDocs(q);
+        const latestPosts = [];
+
+        await querySnapshot.forEach((doc) => {
+            console.log("-------", doc.id, " => ", doc.data().title);
+            latestPosts.push({
+                ...doc.data(),
+                databaseId: doc.id,
+            });
+        });
+
+        console.log("latest", latestPosts);
+    });
+};
+
+export const fbGetAllPosts = () => {
+    return new Promise(async (resolve, reject) => {
+        const allPosts = [];
+        const querySnapshot = await getDocs(collection(database, "posts"));
+
+        querySnapshot.forEach((doc) =>
+            allPosts.push({
+                ...doc.data(),
+                databaseId: doc.id,
+            })
+        );
+
+        resolve(allPosts);
     });
 };
