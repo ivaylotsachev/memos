@@ -3,8 +3,8 @@ import { useDispatch } from "react-redux";
 import { motion } from "framer-motion";
 import { auth } from "../../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { setUser } from "../../redux/actions/usersAction";
-import Form from "../form/Form";
+import { setLoginError, setUser } from "../../redux/actions/usersAction";
+import LoginForm from "../forms/LoginForm";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -13,18 +13,18 @@ const Login = () => {
     const handleSubmit = async (data) => {
         console.log("login component", data);
 
-        // signInWithEmailAndPassword(auth, values.email, values.password)
-        //     .then((userCredential) => {
-        //         const user = userCredential.user;
-        //         dispatch(setUser(user));
-        //         navigate("/")
-        //     })
-        //     .catch((error) => {
-        //         const errorCode = error.code;
-        //         const errorMessage = error.message;
-
-        //         console.log("logni error", errorMessage)
-        //     });
+        signInWithEmailAndPassword(auth, data.email, data.password)
+            .then((userCredential) => {
+                const user = userCredential.user;
+                dispatch(setUser(user));
+                navigate("/");
+            })
+            .catch((error) => {
+                dispatch(setLoginError(error.message));
+                setTimeout(() => {
+                    dispatch(setLoginError(""));
+                }, 3000);
+            });
     };
 
     return (
@@ -34,11 +34,7 @@ const Login = () => {
             exit={{ opacity: 0 }}
             className='page-container register-page flex flex-column flex-center'
         >
-            <Form
-                title="Login"
-                type="login"
-                handleSubmit={handleSubmit}
-            />
+            <LoginForm handleSubmit={handleSubmit} />
         </motion.div>
     );
 };

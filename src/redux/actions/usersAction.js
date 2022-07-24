@@ -1,29 +1,39 @@
-import * as types from '../types';
-import { fbRegisterUser, fbUpdateUser } from '../../utils/firebase/users';
-import { auth } from '../../firebase';
+import * as types from "../types";
+import { fbRegisterUser, fbUpdateUser } from "../../utils/firebase/users";
+import { auth } from "../../firebase";
 
-export const setUser = payload => ({ type: types.SET_ACTIVE_USER, payload });
+export const setUser = (payload) => ({ type: types.SET_ACTIVE_USER, payload });
 
-export const setRegisterError = payload => ({ type: types.SET_REGISTER_ERROR, payload })
+export const setRegisterError = (payload) => ({
+    type: types.SET_REGISTER_ERROR,
+    payload,
+});
+
+export const setLoginError = (payload) => ({
+    type: types.SET_LOGIN_ERROR,
+    payload,
+});
 
 // async actions
 export const registerUser = (user, navigate) => {
     return (dispatch) => {
         fbRegisterUser(user)
-            .then(response => {
+            .then((response) => {
                 fbUpdateUser(user.name)
-                    .then(data => {
+                    .then((data) => {
                         dispatch(setUser(auth.currentUser));
-                        navigate("/")
+                        navigate("/");
                     })
-                    .catch(error => {
+                    .catch((error) => {
                         dispatch(setRegisterError(error.message));
-                    })
+                    });
             })
-            .catch(error => {
-                console.log("-------", error)
-                dispatch(setRegisterError(error))
-            })
-    }
-
-}
+            .catch((error) => {
+                console.log("-------", error);
+                dispatch(setRegisterError(error));
+                setTimeout(() => {
+                    dispatch(setRegisterError(""));
+                }, 3000);
+            });
+    };
+};
