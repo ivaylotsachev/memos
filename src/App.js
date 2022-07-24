@@ -6,10 +6,16 @@ import { AnimatePresence } from "framer-motion";
 import { onAuthStateChanged } from "firebase/auth";
 import { setUser } from "./redux/actions/usersAction";
 // components
-import { CreatePost, Header, Home, Login, Register } from "./components";
+import {
+    CreatePost,
+    Header,
+    Home,
+    Login,
+    Register,
+    UserPosts,
+} from "./components";
 import { auth } from "./firebase";
-import { subscribeToPostsCollection } from "./utils/firebase/posts";
-import { setPosts, subscribeToPosts } from "./redux/actions/postsAction";
+import { subscribeToPosts } from "./redux/actions/postsAction";
 
 function App() {
     const location = useLocation();
@@ -17,7 +23,6 @@ function App() {
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
-            console.log("app user", user);
             user && dispatch(setUser(user));
         });
 
@@ -33,6 +38,7 @@ function App() {
                     <Route path='/register' element={<Register />} />
                     <Route path='/login' element={<Login />} />
                     <Route path='/create-post' element={<CreatePost />} />
+                    <Route path='/user-posts' element={<UserPosts />} />
                 </Routes>
             </AnimatePresence>
         </>

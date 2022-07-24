@@ -39,7 +39,7 @@ const CreatePostForm = ({ type, title, handleSubmit }) => {
                     Content
                 </label>
                 <textarea
-                    rows={10}
+                    rows={5}
                     type='content'
                     name='content'
                     id='content'
@@ -56,7 +56,7 @@ const CreatePostForm = ({ type, title, handleSubmit }) => {
 
             <div className='input-container flex flex-column'>
                 <label htmlFor='email' className='mb-2'>
-                    Content
+                    imageUrl
                 </label>
                 <input
                     type='photoUrl'

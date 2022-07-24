@@ -10,8 +10,6 @@ const initialState = {
 const formReducer = (state = initialState, action) => {
     const { type, payload } = action;
 
-    console.log("emailreducer", payload);
-
     switch (type) {
         case types.SET_NAME_ERROR:
             return { ...state, usernameError: payload };
