@@ -14,36 +14,62 @@ const CreatePostForm = ({ type, title, handleSubmit }) => {
     return (
         <form className='form-container' onSubmit={onSubmit}>
             <h1 className='form-title mb-5'>{title || "No title"}</h1>
-            {/* <FormInput
-                    label={'title'}
-                    type={'text'}
+
+            <div className='input-container flex flex-column'>
+                <label htmlFor='email' className='mb-2'>
+                    Title
+                </label>
+                <input
+                    type='title'
+                    name='title'
+                    id='title'
                     value={values.title}
-                    errors={errors}
-                    name={'title'}
-                    changeHandler={changeHandler}
-                    validator={validator}
-                    errorMessage="Title must be at least 3 characters"
+                    onChange={changeHandler}
+                    onBlur={validator}
                 />
-                <FormInput
-                    label="Content"
-                    type="textarea"
+                {errors.title && (
+                    <p className='error-message'>
+                        Title must be at least 3 characters
+                    </p>
+                )}
+            </div>
+
+            <div className='input-container flex flex-column'>
+                <label htmlFor='email' className='mb-2'>
+                    Content
+                </label>
+                <textarea
+                    rows={10}
+                    type='content'
+                    name='content'
+                    id='content'
                     value={values.content}
-                    errors={errors}
-                    name="content"
-                    changeHandler={changeHandler}
-                    validator={validator}
-                    errorMessage="Content must be at least 50 characters"
+                    onChange={changeHandler}
+                    onBlur={validator}
                 />
-                <FormInput
-                    label="Post image url"
-                    type="text"
+                {errors.content && (
+                    <p className='error-message'>
+                        Content must be at least 20 characters
+                    </p>
+                )}
+            </div>
+
+            <div className='input-container flex flex-column'>
+                <label htmlFor='email' className='mb-2'>
+                    Content
+                </label>
+                <input
+                    type='photoUrl'
+                    name='photoUrl'
+                    id='photoUrl'
                     value={values.photoUrl}
-                    errors={errors}
-                    name="photoUrl"
-                    changeHandler={changeHandler}
-                    validator={validator}
-                    errorMessage="Invalid url"
-                /> */}
+                    onChange={changeHandler}
+                    onBlur={validator}
+                />
+                {errors.photoUrl && (
+                    <p className='error-message'>Invalid url</p>
+                )}
+            </div>
 
             <button className='button button-success mt-3'>Create</button>
         </form>

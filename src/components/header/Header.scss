@@ -15,27 +15,25 @@
             z-index: 2;
             display: flex;
             align-items: center;
-            display: flex;
             justify-content: center;
-            align-items: center;
-        }
-        p:after {
-            content: "";
-            width: 0;
-            height: 100%;
-            background-color: black;
-            position: absolute;
-            mix-blend-mode:difference;
-            z-index: 1;
-            transition: width 0.3s ease-in-out;
+
+            &:after {
+                content: "";
+                display: block;
+                width: 0;
+                height: 2px;
+                background-color: green;
+                position: absolute;
+                bottom: 0;
+                transition: width 0.3s ease-in-out;
+            }
         }
         .active {
-            p {
-                color: white;
-                mix-blend-mode: difference;
-                &:after {
-                    width: 110%;
-                }
+            p:after {
+                width: 100%;
+            }
+            svg {
+                color: green;
             }
         }
     }

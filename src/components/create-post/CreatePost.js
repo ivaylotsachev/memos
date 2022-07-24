@@ -19,7 +19,7 @@ const CreatePost = () => {
             exit={{ opacity: 0 }}
             className='page-container register-page flex flex-column flex-center'
         >
-            {/* <CreatePostForm title='Create post' handleSubmit={handleSubmit} /> */}
+            <CreatePostForm title='Create post' handleSubmit={handleSubmit} />
         </motion.div>
     );
 };
