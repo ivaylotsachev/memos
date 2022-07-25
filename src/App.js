@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-import { useDispatch } from "react-redux/es/exports";
+import { useDispatch, useSelector } from "react-redux/es/exports";
 import { useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { onAuthStateChanged } from "firebase/auth";
@@ -13,13 +13,16 @@ import {
     Login,
     Register,
     UserPosts,
+    Loader,
 } from "./components";
 import { auth } from "./firebase";
 import { subscribeToPosts } from "./redux/actions/postsAction";
+import { setLoader } from "./redux/actions/appAction";
 
 function App() {
     const location = useLocation();
     const dispatch = useDispatch();
+    const posts = useSelector((state) => state.posts.posts);
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
@@ -28,6 +31,10 @@ function App() {
 
         dispatch(subscribeToPosts());
     }, []);
+
+    useEffect(() => {
+        posts.length && dispatch(setLoader({ isActive: false, text: "" }));
+    }, [posts]);
 
     return (
         <>
@@ -41,6 +48,7 @@ function App() {
                     <Route path='/user-posts' element={<UserPosts />} />
                 </Routes>
             </AnimatePresence>
+            <Loader />
         </>
     );
 }
