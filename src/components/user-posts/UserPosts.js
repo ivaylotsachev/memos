@@ -44,7 +44,7 @@ const UserPosts = () => {
     }, [user, posts]);
     return (
         <div className='page-container'>
-            <PostsList posts={userPosts} />
+            <PostsList posts={userPosts} postClickable={true} />
         </div>
     );
 };

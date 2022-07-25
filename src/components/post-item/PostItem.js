@@ -1,6 +1,10 @@
+import { useNavigate } from "react-router-dom";
+import classNames from "classnames";
+import { motion } from "framer-motion";
+// styles
 import "./PostItem.scss";
 
-const PostItem = ({ post, type, emphasis }) => {
+const PostItem = ({ post, type, emphasis, clickable }) => {
     const {
         title,
         content,
@@ -11,18 +15,27 @@ const PostItem = ({ post, type, emphasis }) => {
         photoUrl,
     } = post;
 
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        clickable && navigate(`/posts/${databaseId}`);
+    };
+
+    const postClassname = classNames({
+        "post-item flex mb-3": true,
+        emphasis: emphasis,
+        single: type && type === "single",
+        latest: type && type === "latest",
+    });
+
     return (
-        <div
-            className={`post-item flex mb-3 ${
-                type === "latest" ? "latest" : null
-            } ${emphasis ? "emphasis" : null}`}
-        >
+        <div className={postClassname} onClick={handleClick}>
             <div className='post-image-container'>
                 <img src={photoUrl} alt='' />
             </div>
-            <div className='post-content p-3'>
-                <h2 className='mb-2'>{title}</h2>
-                <p className='content'>{content}</p>
+            <div className='post-content flex flex-column p-3'>
+                <h2 className=''>{title}</h2>
+                <p className='content my-3'>{content}</p>
                 <div className='post-footer mt-3 flex'>
                     <div className='avatar-container'>
                         <img src={avatar} alt='' />

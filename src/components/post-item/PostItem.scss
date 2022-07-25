@@ -3,6 +3,7 @@
     max-width: 49%;
     overflow: hidden;
     border: var(--main-border);
+    transition: background 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
 
     img {
         width: 100%;
@@ -13,9 +14,17 @@
     .post-image-container {
         width: 100%;
         max-width: 40%;
+        overflow: hidden;
+        img {
+            transition: transform 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
     }
     .post-content {
         flex: 1;
+    }
+
+    .post-footer {
+        margin-top: auto;
     }
 
     .content {
@@ -57,6 +66,22 @@
 
         .post-image-container {
             max-width: unset;
+        }
+    }
+
+    &.single {
+        max-width: unset;
+        flex-direction: column;
+        .post-image-container {
+            max-width: unset;
+            height: 50vh;
+        }
+    }
+
+    &:not(.single):hover {
+        background: rgb(227, 227, 227);
+        .post-image-container img {
+            transform: scale(1.2);
         }
     }
 }

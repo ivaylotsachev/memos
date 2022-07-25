@@ -14,6 +14,7 @@ import {
     Register,
     UserPosts,
     Loader,
+    PostView,
 } from "./components";
 import { auth } from "./firebase";
 import { subscribeToPosts } from "./redux/actions/postsAction";
@@ -46,6 +47,7 @@ function App() {
                     <Route path='/login' element={<Login />} />
                     <Route path='/create-post' element={<CreatePost />} />
                     <Route path='/user-posts' element={<UserPosts />} />
+                    <Route path='/posts/:postId' element={<PostView />} />
                 </Routes>
             </AnimatePresence>
             <Loader />

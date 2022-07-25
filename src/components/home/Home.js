@@ -29,10 +29,10 @@ const Home = () => {
             </div>
 
             <h2 className='my-4'>Latest</h2>
-            <PostsList posts={latestPosts} type='latest' />
+            <PostsList posts={latestPosts} type='latest' postClickable={true} />
 
             <h2 className='mt-5 mb-3'>All posts</h2>
-            <PostsList posts={posts} />
+            <PostsList posts={posts} postClickable={true} />
         </motion.div>
     );
 };
